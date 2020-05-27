@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+body { background:rgb(30,30,40); }
+form { max-width:420px; margin:50px auto; }
+h1 { color: #CC6666;
+    text-align: center;}
+.feedback-input {
+  color:white;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 18px;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color: transparent;
+  border:2px solid #CC6666;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+
+.feedback-input:focus { border:2px solid #CC4949; }
+
+textarea {
+  height: 150px;
+  line-height: 150%;
+  resize:vertical;
+}
+
+.button {
+
+    padding: 13px;
+    margin-bottom: 15px;
+    width:100%;
+  box-sizing: border-box;
+    border-radius: 5px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  /* margin: 4px 2px; */
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button3 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #f44336;
+}
+
+.button3:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+</style>
+<body>
+    
+    <!-- <input id="edValue" type="text" onInput="edValueKeyPress()"><br> -->
+    <!-- <span id="lblValue">The text box contains: </span><br> -->
+    <!-- <div id="back">
+    <input type="text" id="encrypt"  /><br>
+    <input type="text" id="decrypt"  /><br>
+    </div> -->
+    <h1 id="head">Encrypting Now</h1>
+    <form>      
+        <!-- <input type="submit" value="SUBMIT"/> -->
+        <button type="button" class="button button3" onclick="myFunction()" id="butt">Click to start Decrypting</button>
+        <input  type="text" class="feedback-input" id="encrypt" placeholder="Input Data" />   
+        <input  type="text" class="feedback-input" id="decrypt" placeholder="Output Data" />
+      </form>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js" ></script>
+    <script type="text/javascript">
+        var ende = true;
+        function myFunction() {
+            if(ende){
+                document.getElementById("head").innerHTML = "Decrypting Now";
+                document.getElementById("butt").innerHTML = "Click to start Encrypting";
+                $('#encrypt').val('');
+                $('#decrypt').val('');
+            }
+            else{
+                document.getElementById("head").innerHTML = "Encrypting Now";
+                document.getElementById("butt").innerHTML = "Click to start Decrypting";
+                $('#encrypt').val('');
+                $('#decrypt').val('');
+            }
+            ende = !ende;
+            console.log(ende);
+        }
+        $(document).ready(function(){
+            var encrypt = true;
+            // if(true)
+            // {
+                
+                $("#encrypt").keyup(function(){
+                // alert($(this).val());
+                var x = document.getElementById("encrypt").value;
+                console.log(x);
+                // console.log(typeof x);
+                var i;
+                var s='';
+                for (i = 0; i < x.length; i++) {
+                // text += cars[i] + "<br>";
+                    // console.log(z);
+                    if(x[i]===' '){
+                        s+=' ';
+                    }
+                    else if(x.charCodeAt(i)>95)
+                    s+= String.fromCharCode(-x.charCodeAt(i) + 122+97);
+                    else{
+                        s+= String.fromCharCode(-x.charCodeAt(i) + 90+65);
+                    }
+                }
+                // var lblValue = document.getElementById("lblValue");
+                // lblValue.innerText = "The text box contains: " + s;
+                // console.log(s);
+                // var x = document.getElementById("decrypt").value;
+                // x = s;
+                $('#decrypt').val(s);
+            });
+            // }
+            // else{
+            //     $("#decrypt").keyup(function(){
+            //     // alert($(this).val());
+            //     var x = document.getElementById("decrypt").value;
+            //     // console.log(x);
+            //     // console.log(typeof x);
+            //     var i;
+            //     var s='';
+            //     for (i = 0; i < x.length; i++) {
+            //     // text += cars[i] + "<br>";
+            //         // console.log(z);
+            //         if(x[i]===' '){
+            //             s+=' ';
+            //         }
+            //         else if(x.charCodeAt(i)>95)
+            //         s+= String.fromCharCode(-x.charCodeAt(i) + 122+97);
+            //         else{
+            //             s+= String.fromCharCode(-x.charCodeAt(i) + 90+65);
+            //         }
+            //     }
+            //     var lblValue = document.getElementById("lblValue");
+            //     lblValue.innerText = "The text box contains: " + s;
+            //     // console.log(s);
+            //     // var x = document.getElementById("decrypt").value;
+            //     // x = s;
+            //     $('#encrypt').val(s);
+            // });
+            // }
+        })
+    </script>
+
+<!-- <input type="text" id="txt_name"  /> -->
+</body>
+</html>
