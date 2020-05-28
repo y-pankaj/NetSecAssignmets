@@ -371,8 +371,10 @@ if __name__ == "__main__":
             OP.append(encryptFn(nonce))
         else:
             # using the previous output block to encrypt the current block of plaintext
-            OP.append(encryptFn(OP[-1])
-print("The encrypted blocks of ciphertexts are:")
+            OP.append(encryptFn(OP[-1]))
+        ciphertexts.append(plaintextInBlocks[i]^OP[-1])
+        
+    print("The encrypted blocks of ciphertexts are:")
     # printing the ciphertexts
     for i in range(len(ciphertexts)):
         print("C{} = {}".format(i+1,ciphertexts[i]))
@@ -380,15 +382,13 @@ print("The encrypted blocks of ciphertexts are:")
     # decrypting the blocks of ciphertexts one by one
     for i in range(len(ciphertexts)):
         if i==0:
-            decryptedData = decryptFn(ciphertexts[i])
             # using nonce to decrypt the first block of ciphertext
-            decryptedData = decryptedData^nonce
-            decryptedPlaintext.append(decryptedData)
+            decryptedData = encryptFn(nonce)
         else:
-            decryptedData = decryptFn(ciphertexts[i])
-            # using the previous block of ciphertext to decrypt the current block of ciphertext
-            decryptedData = decryptedData^ciphertexts[i-1]
-            decryptedPlaintext.append(decryptedData)
+                # using the previous block of output to decrypt the current block of ciphertext
+            decryptedData = encryptFn(OP[i-1])
+        decryptedData = decryptedData^ciphertexts[i]
+        decryptedPlaintext.append(decryptedData)
     # recovered plaintext
     recoveredPT = ""
     print("The decrypted blocks of message blocks are:")
